@@ -7,9 +7,8 @@ AI 서비스 엔지니어링 Track A **6주차**의 교재 저장소입니다. 5
 
 - 강의 사이트: [6주차 교안](https://2026-ai-service-engineering-a.github.io/ai_service_engineering-track_a/course/session-06/)
 - 앞선 랩: [week05-agent-lab](https://github.com/2026-ai-service-engineering-a/week05-agent-lab)
-- **이 저장소는 v0.2에서 시작합니다.** 5주차가 끝난 그 지점이 이번 주의
-  출발점이라, 첫 태그가 v0.1이 아니라 v0.2입니다. v0.2의 `agent/`·`tests/`는
-  week05의 v0.2와 같습니다
+- 5주차 랩의 예제 31종이 그대로 들어 있고, 에이전트는 루프·하네스까지 실린
+  완성본입니다. 중간 버전을 오갈 필요 없이 `main` 하나로 전부 실행합니다
 - GPU 불필요, 로컬 Python 환경 불필요. Docker만 있으면 됩니다
 
 ## 시작하기
@@ -52,27 +51,17 @@ docker compose exec lab pytest                 # 유닛 테스트 (키 불필요
 
 - 키 없이도 도는 예제: 경로 감금, 출력 필터, 비용 추정, budget guard,
   트레이스 로그, MCP 도구 목록 수신
-- `04_react/` 4종은 에이전트 본체를 사용하므로 v0.3 이상에서 동작합니다
-  (이전 태그에서 실행하면 checkout 안내가 나옵니다)
+- `04_react/` 4종은 에이전트 본체(`agent/react.py`)를 직접 사용합니다
 
 ## 여행 플래너 에이전트
 
-`agent/` 패키지가 릴리즈 사다리를 오르며 자랍니다. `main`은 항상 완성본입니다.
-
-| 릴리즈 | 상태 | 테스트 |
-| --- | --- | --- |
-| v0.2 | 5주차 종료 지점: 도구는 있고 루프는 없다 | 16개 |
-| v0.3 | ReAct 루프 완성: 여행 플래너가 처음 동작 | 17개 |
-| v0.4 | 고급 루프: Reflexion 재시도 장착 | 21개 |
-| v1.0 | 하네스 완성: 인젝션 방어 + budget guard | 33개 |
-| v1.1\~v1.2 | MCP 시연 4종 추가 (stdio·HTTP 전송) | 33개 |
-
-재현 방법:
+`agent/` 패키지가 이번 주 예제에서 익힌 것을 실제로 조립한 결과물입니다.
+5주차의 도구 위에 루프·평가·하네스가 차례로 물려 있습니다.
 
 ```bash
-git checkout v0.3 && docker compose up --build -d   # 그 시점의 코드로 그 시점의 동작
-git diff v0.2 v0.3                                  # 이번 feature가 코드로는 무엇이었나
-docker compose exec lab pytest                      # 어느 태그에서든 그 시점의 테스트가 통과
+docker compose exec lab python -m agent.main --verbose "3박 4일 오사카, 예산 80만원"
+docker compose exec lab python -m agent.main --max-cost 0.10 "3박 4일 오사카, 예산 80만원"
+docker compose exec lab pytest        # 유닛 테스트 33개 (키 불필요)
 ```
 
 ## 저장소 구조
@@ -83,10 +72,10 @@ week06-agent-lab/
 │   └── _shared.py       # 모델 선택 재노출 + 출력 헬퍼 + 여행 목데이터
 ├── agent/               # 여행 플래너 에이전트 본체
 │   ├── config.py        # 모델 문자열이 사는 유일한 곳
-│   ├── tools.py         # 검색·이동시간·예산 (pydantic 스키마, 5주차 v0.2)
-│   ├── react.py         # ReAct 루프 + 트레이스 (v0.3)
-│   ├── reflexion.py     # 평가·재시도 (v0.4)
-│   ├── harness.py       # 경계 방어·budget guard·JSONL 트레이스 (v1.0)
+│   ├── tools.py         # 검색·이동시간·예산 (pydantic 스키마, 5주차 몫)
+│   ├── react.py         # ReAct 루프 + 트레이스
+│   ├── reflexion.py     # 평가·재시도
+│   ├── harness.py       # 경계 방어·budget guard·JSONL 트레이스
 │   └── main.py          # CLI
 ├── tests/               # 유닛 테스트 — LLM은 각본(mock), 키·네트워크 불필요
 ├── check_env.py         # 키 유효성 + 패키지 버전 점검
@@ -96,9 +85,8 @@ week06-agent-lab/
 
 ## git 워크플로
 
-git flow를 따릅니다: `develop`에서 `feature/*` 분기, 릴리즈는
-`release/<태그>`를 거쳐 `main` 머지 + 태그. `main`에 직접 커밋하지 않습니다.
-커밋 메시지 제목은 영어 명령형 한 줄
+git flow를 따릅니다: `develop`에서 `feature/*` 분기 → `develop` 머지.
+`main`에 직접 커밋하지 않습니다. 커밋 메시지 제목은 영어 명령형 한 줄
 
 ## 문제 해결
 
@@ -107,5 +95,4 @@ git flow를 따릅니다: `develop`에서 `feature/*` 분기, 릴리즈는
 | `docker: command not found` | Docker Desktop 실행 여부 |
 | check_env 키 인증 실패 | `.env` 키 앞뒤 공백·따옴표, 충전 여부 |
 | `.env` 수정이 반영 안 됨 | `docker compose up -d --force-recreate` |
-| 예제가 ImportError로 종료 | 해당 예제 안내대로 `git checkout <태그>` |
 | 모델 호출이 404 (NotFoundError) | 신규 키에서 구세대 모델이 막힌 경우. `agent/config.py`의 모델 문자열을 살아 있는 것으로 바꿉니다 |
