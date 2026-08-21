@@ -11,8 +11,7 @@ try:
     from agent import react
 except ImportError:
     raise SystemExit(
-        "이 예제는 에이전트에 ReAct 루프가 실린 v0.3 이상에서 동작합니다.\n"
-        "  git checkout v0.3   (또는 main)"
+        "이 예제는 에이전트 본체(agent/react.py)가 있어야 동작합니다."
     )
 
 from examples._shared import h1

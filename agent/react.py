@@ -1,4 +1,4 @@
-"""ReAct 루프 — v0.3에서 완성된다.
+"""ReAct 루프.
 
 reasoning(다음 행동 판단) → action(도구 호출) → observation(결과 관찰)을
 종료 조건까지 반복한다. 종료 조건은 두 가지뿐이다:
@@ -8,7 +8,7 @@ reasoning(다음 행동 판단) → action(도구 호출) → observation(결과
 트레이스(스텝 기록)를 데이터로 남긴다. 에이전트를 이해한다는 것은
 트레이스를 읽을 줄 안다는 뜻이다 (examples/04_react/).
 
-v1.0: 하네스가 루프에 물렸다.
+하네스가 루프에 물려 있다.
   · 모든 도구 결과는 데이터 경계로 감싸이고, 인젝션 흔적은 기록·경고된다
   · BudgetGuard를 주면 호출마다 비용이 장부에 쌓이고, 중단 임계에서
     루프가 멈춘다 (stopped_by="budget")
@@ -72,7 +72,7 @@ def run(
     guard: BudgetGuard | None = None,
     logger: TraceLogger | None = None,
 ) -> ReactResult:
-    """질문 하나를 ReAct 루프로 푼다. guard·logger는 하네스 장비다 (v1.0)."""
+    """질문 하나를 ReAct 루프로 푼다. guard·logger는 하네스 장비다."""
     model = model or pick_model()
     # 경계 규칙은 시스템 프롬프트의 일부다 — 마커(wrap)와 항상 짝으로 간다
     messages: list[dict] = [

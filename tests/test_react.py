@@ -69,6 +69,6 @@ def test_custom_system_prompt_used(monkeypatch):
     monkeypatch.setattr(react, "completion", llm)
     react.run("질문", model="fake-model", system="커스텀 프롬프트")
     sent = llm.calls[0]["messages"][0]["content"]
-    # v1.0: 커스텀 프롬프트를 쓰되, 경계 규칙은 항상 함께 실린다 (마커와 짝)
+    # 커스텀 프롬프트를 쓰되, 경계 규칙은 항상 함께 실린다 (마커와 짝)
     assert sent.startswith("커스텀 프롬프트")
     assert "데이터 경계 규칙" in sent

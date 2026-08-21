@@ -20,7 +20,7 @@ def show(label: str, value: object) -> None:
 # ── 여행 목데이터 ──────────────────────────────────────────────────────
 # 6주차 랩의 05_loops/·06_harness/ 예제들이 쓰는 결정적 도구. 실제 API를 부르지 않아
 # 키 소모 없이 루프의 구조 자체를 관찰할 수 있다. (에이전트 본체의 도구는
-# agent/tools.py — v0.2에서 실린다)
+# agent/tools.py)
 
 MOCK_PLACES: dict[str, list[dict]] = {
     "오사카": [
