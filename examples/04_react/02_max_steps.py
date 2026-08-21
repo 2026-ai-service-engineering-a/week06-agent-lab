@@ -10,7 +10,7 @@
 try:
     from agent import react
 except ImportError:
-    raise SystemExit("이 예제는 v0.3 이상에서 동작합니다: git checkout v0.3 (또는 main)")
+    raise SystemExit("이 예제는 에이전트 본체(agent/react.py)가 있어야 동작합니다.")
 
 from examples._shared import h1
 

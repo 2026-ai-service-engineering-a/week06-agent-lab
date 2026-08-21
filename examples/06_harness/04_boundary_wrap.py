@@ -47,5 +47,5 @@ for label, system, content in [
     print("  " + answer.strip()[:200])
 
 h1("정리")
-print("  경계 마커 + 경계 규칙은 코드가 만드는 구조적 방어다. 에이전트 본체(v1.0)의")
+print("  경계 마커 + 경계 규칙은 코드가 만드는 구조적 방어다. 에이전트 본체의")
 print("  harness.wrap_tool_result가 모든 도구 결과에 이것을 자동 적용한다.")

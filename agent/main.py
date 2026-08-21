@@ -1,11 +1,11 @@
-"""여행 플래너 에이전트 CLI — v1.0: 하네스 완성.
+"""여행 플래너 에이전트 CLI — 루프·평가·하네스가 모두 물린 완성본.
 
   docker compose exec lab python -m agent.main "3박 4일 오사카, 예산 80만원"
   docker compose exec lab python -m agent.main --verbose "..."        # 트레이스
   docker compose exec lab python -m agent.main --max-cost 0.10 "..."  # 지갑의 보험
   docker compose exec lab python -m agent.main --no-reflexion "..."   # 평가 없이
 
-v1.0의 루프에는 하네스가 물려 있다: 모든 도구 결과가 데이터 경계로 감싸이고,
+루프에는 하네스가 물려 있다: 모든 도구 결과가 데이터 경계로 감싸이고,
 인젝션 흔적은 기록·경고되며, 누적 비용은 BudgetGuard가 지키고, 실행 전체가
 traces/*.jsonl에 남는다.
 """
