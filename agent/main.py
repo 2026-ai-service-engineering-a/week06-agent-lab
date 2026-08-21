@@ -35,11 +35,12 @@ def main() -> None:
         )
         print(result.answer)
     else:
-        result = reflexion.run_with_reflexion(args.question, verbose=args.verbose)
+        result = reflexion.run_with_reflexion(
+            args.question, verbose=args.verbose, guard=guard, logger=logger
+        )
         print(result.answer)
 
-    print(f"
-(누적 비용 ${guard.spent:.4f} · 트레이스 {logger.path})")
+    print(f"\n(누적 비용 ${guard.spent:.4f} · 트레이스 {logger.path})")
 
 
 if __name__ == "__main__":

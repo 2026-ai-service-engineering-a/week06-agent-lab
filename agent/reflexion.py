@@ -13,6 +13,7 @@ from litellm import completion
 
 from agent import react
 from agent.config import pick_model
+from agent.harness import BudgetGuard, TraceLogger
 
 RUBRIC = """당신은 여행 일정 심사관이다. 다음 기준으로 채점하라 (각 0~10):
 - schedule: 요청한 기간의 하루 단위 일정이 전부 있는가
@@ -67,8 +68,14 @@ def run_with_reflexion(
     model: str | None = None,
     max_retries: int = 2,
     verbose: bool = False,
+    guard: BudgetGuard | None = None,
+    logger: TraceLogger | None = None,
 ) -> ReflexionResult:
-    """생성 → 평가 → (미달이면 피드백과 함께) 재생성. 최대 max_retries회 재시도."""
+    """생성 → 평가 → (미달이면 피드백과 함께) 재생성. 최대 max_retries회 재시도.
+
+    guard·logger는 그대로 생성자 루프에 넘긴다. 재시도가 곧 재호출이라
+    하네스 없이 돌면 재시도만큼 비용이 배가된다.
+    """
     result = ReflexionResult(answer=None, attempts=0)
     feedback: str | None = None
 
@@ -78,7 +85,9 @@ def run_with_reflexion(
         if feedback:
             prompt = f"{question}\n\n[직전 답안에 대한 평가] {feedback}\n이 문제를 고쳐 다시 작성하라."
 
-        loop_result = react.run(prompt, model=model, verbose=verbose)
+        loop_result = react.run(
+            prompt, model=model, verbose=verbose, guard=guard, logger=logger
+        )
         result.answer = loop_result.answer
 
         evaluation = evaluate(question, result.answer or "", model=model)
