@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-AI 서비스 엔지니어링 Track A 6주차 실습 랩. 예제 55종과 루프·하네스·MCP까지
+AI 서비스 엔지니어링 Track A 6주차 실습 랩. 예제 56종과 루프·하네스·MCP까지
 완성된 여행 플래너 에이전트가 들어 있는 저장소다. 수업은 중간 버전을 오가지
 않고 `main` 하나로 진행한다. 이 문서는 여기서 작업하는 AI 도구를 위한 가이드다.
 
@@ -38,7 +38,7 @@ compileall은 통과시킨다.
 
 ## 5주차 랩과의 관계
 
-`examples/01_api`·`02_litellm`·`03_tools` 31종과 `agent/tools.py`·`config.py`는
+`examples/01_api`·`02_litellm`·`03_tools` 32종과 `agent/tools.py`·`config.py`는
 `week05-agent-lab`과 같은 내용이다. 한쪽을 고치면 다른 쪽도 함께 고친다.
 
 ## 강의 사이트와의 동기화
