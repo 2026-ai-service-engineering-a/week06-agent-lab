@@ -2,4 +2,5 @@
 litellm>=1.74,<2
 pydantic>=2.10,<3
 pytest>=8.3,<9
+# examples/07_mcp에서 쓴다. 수업 중 재빌드를 피하려고 처음부터 넣어 둔다.
 mcp>=1.0,<2
