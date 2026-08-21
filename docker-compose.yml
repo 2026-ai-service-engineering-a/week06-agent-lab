@@ -1,0 +1,17 @@
+# 6주차 실습 랩 — 단일 lab 컨테이너.
+#
+#   cp .env.sample .env      # 키 채우기 (셋 중 하나면 됨)
+#   docker compose up --build -d
+#   docker compose exec lab python check_env.py
+#   docker compose exec lab python examples/01_api/01_hello_completion.py
+#   docker compose exec lab pytest
+#
+# 저장소를 /app에 바인드 마운트하므로 호스트에서 코드를 고치면 바로 반영된다.
+services:
+  lab:
+    build: .
+    env_file: .env
+    volumes:
+      - .:/app
+    # 예제를 exec로 실행하는 방식이라 컨테이너는 떠 있기만 하면 된다.
+    command: sleep infinity
