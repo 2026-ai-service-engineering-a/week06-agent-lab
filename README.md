@@ -7,7 +7,7 @@ AI 서비스 엔지니어링 Track A **6주차**의 교재 저장소입니다. 5
 
 - 강의 사이트: [6주차 교안](https://2026-ai-service-engineering-a.github.io/ai_service_engineering-track_a/course/session-06/)
 - 앞선 랩: [week05-agent-lab](https://github.com/2026-ai-service-engineering-a/week05-agent-lab)
-- 5주차 랩의 예제 31종이 그대로 들어 있고, 에이전트는 루프·하네스까지 실린
+- 5주차 랩의 예제 32종이 그대로 들어 있고, 에이전트는 루프·하네스까지 실린
   완성본입니다. 중간 버전을 오갈 필요 없이 `main` 하나로 전부 실행합니다
 - GPU 불필요, 로컬 Python 환경 불필요. Docker만 있으면 됩니다
 
@@ -32,10 +32,10 @@ docker compose exec lab python -m agent.main "3박 4일 오사카, 예산 80만�
 docker compose exec lab pytest                 # 유닛 테스트 (키 불필요)
 ```
 
-## 예제 55종
+## 예제 56종
 
 `examples/` 아래 7개 폴더. 각 파일 상단 docstring에 "무엇을 보는가"와 실행
-명령이 있습니다. 앞의 3폴더 31종은 5주차 몫이라 그대로 두었고(복습·참조용),
+명령이 있습니다. 앞의 3폴더 32종은 5주차 몫이라 그대로 두었고(복습·참조용),
 **이번 주에 수업에서 실행하는 것은 뒤의 4폴더 24종**입니다. 각 예제의 실행
 결과와 해설은 강의 사이트의 6주차 교안에 있습니다.
 
@@ -43,7 +43,7 @@ docker compose exec lab pytest                 # 유닛 테스트 (키 불필요
 | --- | --- | --- | --- |
 | `01_api/` | LLM API의 본질: 역할·토큰·스트리밍·무상태·비용 | 11종 | 5주차 |
 | `02_litellm/` | 통합 레이어: 교체·폴백·캐시·라우터·임베딩 | 10종 | 5주차 |
-| `03_tools/` | tool calling 심화: 스키마·검증·구조화 출력 | 10종 | 5주차 |
+| `03_tools/` | tool calling 심화: 스키마·검증·구조화 출력·도구 유무 대비 | 11종 | 5주차 |
 | `04_react/` | ReAct 루프: 트레이스·한도·절제·컨텍스트 팽창 | 4종 | **6주차** |
 | `05_loops/` | ReAct 너머: Plan-Execute·재계획·Reflexion·ReWOO | 6종 | **6주차** |
 | `06_harness/` | 하네스: 인젝션 방어·권한·경로 감금·budget guard | 10종 | **6주차** |
@@ -68,7 +68,7 @@ docker compose exec lab pytest        # 유닛 테스트 33개 (키 불필요)
 
 ```plaintext
 week06-agent-lab/
-├── examples/            # 예제 55종 (7개 폴더, self-contained)
+├── examples/            # 예제 56종 (7개 폴더, self-contained)
 │   └── _shared.py       # 모델 선택 재노출 + 출력 헬퍼 + 여행 목데이터
 ├── agent/               # 여행 플래너 에이전트 본체
 │   ├── config.py        # 모델 문자열이 사는 유일한 곳
